@@ -5,8 +5,9 @@ import useDropDown from "./useDropdown";
 
 const SearchParams = () => {
   const [location, setLocation] = useState("Seatle, WA");
+  const [, setPets] = useState([]);
   const [animal, AnimalDropDowns] = useDropDown("Animal", "cat", ANIMALS);
-  const [, BreedDropDowns, setBreed, setBreeds] = useDropDown(
+  const [breed, BreedDropDowns, setBreed, setBreeds] = useDropDown(
     "Breed",
     "Mixed",
     []
@@ -24,9 +25,19 @@ const SearchParams = () => {
       .catch();
   }, [animal, setBreed, setBreeds]);
 
+  async function requestPets() {
+    const { animals } = await pet.animals({ location, type: animal, breed });
+    setPets(animals || []);
+  }
+
+  const onSubmit = e => {
+    e.preventDefault();
+    requestPets();
+  };
+
   return (
     <div className="search-params">
-      <form>
+      <form onSubmit={onSubmit}>
         <label htmlFor="location">
           Location
           <input
