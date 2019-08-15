@@ -1,0 +1,22 @@
+{
+  "name": "adoptme",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "format": "prettier \"src/**/*.{js,html}\" --write"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rafaelaudy/adopme.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rafaelaudy/adopme/issues"
+  },
+  "homepage": "https://github.com/rafaelaudy/adopme#readme",
+  "devDependencies": {
+    "prettier": "^1.18.2"
+  }
+}
