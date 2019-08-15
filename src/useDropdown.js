@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 
-const useDropdown = (label, defaultState, options) => {
+const useDropdown = (label, defaultState, defaultOptions) => {
   const [state, setState] = useState(defaultState);
+  const [options, setOptions] = useState(defaultOptions);
   const id = `use-dropdown-${label.toLowerCase().trim()}`;
 
   const Dropdown = (
@@ -24,7 +25,7 @@ const useDropdown = (label, defaultState, options) => {
     </label>
   );
 
-  return [state, Dropdown, setState];
+  return [state, Dropdown, setState, setOptions];
 };
 
 export default useDropdown;
