@@ -2,10 +2,11 @@ import React, { useState, useEffect } from "react";
 import pet, { ANIMALS } from "@frontendmasters/pet";
 
 import useDropDown from "./useDropdown";
+import Results from "./Results";
 
 const SearchParams = () => {
   const [location, setLocation] = useState("Seatle, WA");
-  const [, setPets] = useState([]);
+  const [pets, setPets] = useState([]);
   const [animal, AnimalDropDowns] = useDropDown("Animal", "cat", ANIMALS);
   const [breed, BreedDropDowns, setBreed, setBreeds] = useDropDown(
     "Breed",
@@ -53,6 +54,8 @@ const SearchParams = () => {
 
         <button>Submit</button>
       </form>
+
+      <Results pets={pets}></Results>
     </div>
   );
 };
