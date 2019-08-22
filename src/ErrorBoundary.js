@@ -16,7 +16,9 @@ class ErrorBoundary extends React.Component {
   }
 
   componentDidUpdate() {
-    setTimeout(() => navigate("/"), 5000);
+    if (this.state.errorFound) {
+      setTimeout(() => navigate("/"), 5000);
+    }
   }
 
   render() {
