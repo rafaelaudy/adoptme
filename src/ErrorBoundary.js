@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "@reach/router";
+import { Link, navigate } from "@reach/router";
 
 class ErrorBoundary extends React.Component {
   state = {
@@ -15,11 +15,16 @@ class ErrorBoundary extends React.Component {
     console.log(`Found error! Error: ${error}, Info: ${info}`);
   }
 
+  componentDidUpdate() {
+    setTimeout(() => navigate("/"), 5000);
+  }
+
   render() {
     if (this.state.errorFound) {
       return (
         <h1>
-          There was an error. <Link to="/">Click here</Link> to come back.
+          There was an error. <Link to="/">Click here</Link> to come back. Or
+          wait 5 seconds to be redirected.
         </h1>
       );
     }
