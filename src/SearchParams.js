@@ -14,7 +14,7 @@ const SearchParams = () => {
     "Mixed",
     []
   );
-  const [theme] = useContext(ThemeContext);
+  const [theme, setTheme] = useContext(ThemeContext);
 
   useEffect(() => {
     setBreed();
@@ -35,6 +35,7 @@ const SearchParams = () => {
 
   const onSubmit = e => {
     e.preventDefault();
+    setTheme(theme === "blue" ? "green" : "blue");
     requestPets();
   };
 
