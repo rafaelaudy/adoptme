@@ -1,20 +1,31 @@
 import React from "react";
 import { Link } from "@reach/router";
-import { css } from "@emotion/core";
+import { css, keyframes } from "@emotion/core";
+import colors from "./colors";
 
-const paddingComingFromAConstantSomewhere = 15;
+const spin = keyframes`
+    to {
+        transform: rotate(360deg);
+    }
+`;
 
 const NavBar = () => {
   return (
     <header
       css={css`
-        padding: ${paddingComingFromAConstantSomewhere}px;
+        padding: 15px;
+        color: ${colors.primary};
+
+        &:hover {
+          text-decoration: underline;
+        }
       `}
     >
       <Link to="">Adopt Me!</Link>
       <span
         css={css`
           font-size: 60px;
+          animation: 1s ${spin} linear infinite;
         `}
         role="img"
         aria-label="logo"
