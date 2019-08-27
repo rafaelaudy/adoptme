@@ -26,6 +26,10 @@ const NavBar = () => {
         css={css`
           font-size: 60px;
           animation: 1s ${spin} linear infinite;
+
+          &:hover {
+            animation: 0.5s ${spin} linear infinite;
+          }
         `}
         role="img"
         aria-label="logo"
