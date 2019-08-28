@@ -1,7 +1,25 @@
-import React from "react";
+import React, { FunctionComponent } from "react";
 import { Link } from "@reach/router";
 
-const Pet = ({ id, name, animal, breed, location, media }) => {
+import { Photo } from "@frontendmasters/pet";
+
+interface IProps {
+  id: number;
+  name: string;
+  animal: string;
+  breed: string;
+  location: string;
+  media: Photo[];
+}
+
+const Pet: FunctionComponent<IProps> = ({
+  id,
+  name,
+  animal,
+  breed,
+  location,
+  media
+}) => {
   let hero = "http://placecorgi.com/300/300";
 
   if (media.length) {
@@ -11,7 +29,7 @@ const Pet = ({ id, name, animal, breed, location, media }) => {
   return (
     <Link to={`/details/${id}`} className="pet">
       <div className="image-container">
-        <img src={hero} alt={name}></img>
+        <img src={hero} alt={name} />
       </div>
       <div className="info">
         <h1>{name}</h1>
