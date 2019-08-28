@@ -1,27 +1,27 @@
-import React from "react";
+import React, { ErrorInfo } from "react";
 import { Link, navigate } from "@reach/router";
 
 class ErrorBoundary extends React.Component {
-  state = {
+  public state = {
     errorFound: false
   };
 
-  static getDerivedStateFromError() {
+  public static getDerivedStateFromError() {
     return { errorFound: true };
   }
 
-  componentDidCatch(error, info) {
-    //eslint-disable-next-line
+  public componentDidCatch(error: Error, info: ErrorInfo) {
+    // eslint-disable-next-line
     console.log(`Found error! Error: ${error}, Info: ${info}`);
   }
 
-  componentDidUpdate() {
+  public componentDidUpdate() {
     if (this.state.errorFound) {
       setTimeout(() => navigate("/"), 5000);
     }
   }
 
-  render() {
+  public render() {
     if (this.state.errorFound) {
       return (
         <h1>

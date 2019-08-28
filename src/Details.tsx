@@ -1,19 +1,34 @@
 import React from "react";
-import { navigate } from "@reach/router";
-import pet from "@frontendmasters/pet";
+import { navigate, RouteComponentProps } from "@reach/router";
+import pet, { Photo } from "@frontendmasters/pet";
 
 import Carousel from "./Carousel";
 import ErrorBoundary from "./ErrorBoundary";
 import ThemeContext from "./ThemeContext";
 import Modal from "./Modal";
 
-class Details extends React.Component {
-  state = { loading: true, showModal: false };
+class Details extends React.Component<RouteComponentProps<{ id: string }>> {
+  public state = {
+    loading: true,
+    showModal: false,
+    name: "",
+    animal: "",
+    location: "",
+    breed: "",
+    media: [] as Photo[],
+    description: "",
+    url: ""
+  };
 
-  componentDidMount() {
+  public componentDidMount() {
     const { id } = this.props;
 
-    pet.animal(id).then(({ animal }) => {
+    if (!id) {
+      navigate("/");
+      return;
+    }
+
+    pet.animal(+id).then(({ animal }) => {
       this.setState({
         name: animal.name,
         animal: animal.type,
@@ -27,15 +42,15 @@ class Details extends React.Component {
     });
   }
 
-  adoptPet = () => {
+  public adoptPet = () => {
     navigate(this.state.url);
   };
 
-  toggleModel = () => {
+  public toggleModel = () => {
     this.setState({ showModal: !this.state.showModal });
   };
 
-  render() {
+  public render() {
     const {
       loading,
       showModal,
@@ -66,7 +81,7 @@ class Details extends React.Component {
           </ThemeContext.Consumer>
 
           <p>{description}</p>
-          <Carousel media={media}></Carousel>
+          <Carousel media={media} />
           {showModal ? (
             <Modal>
               <h1>Would you like to Adopt {name}?</h1>
@@ -82,10 +97,12 @@ class Details extends React.Component {
   }
 }
 
-export default function DatailsWithErrorBoundary(props) {
+export default function DatailsWithErrorBoundary(
+  props: RouteComponentProps<{ id: string }>
+) {
   return (
     <ErrorBoundary>
-      <Details {...props}></Details>
+      <Details {...props} />
     </ErrorBoundary>
   );
 }
