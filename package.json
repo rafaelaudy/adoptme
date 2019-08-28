@@ -7,7 +7,8 @@
     "dev": "cross-env NODE_ENV=development parcel src/index.html",
     "dev:mock": "cross-env PET_MOCK=mock npm run dev",
     "format": "prettier \"src/**/*.{js,html}\" --write",
-    "lint": "tslint --project"
+    "lint": "tslint --project",
+    "typecheck": "tsc --noEmit"
   },
   "repository": {
     "type": "git",

@@ -1,4 +1,4 @@
-import React, { useState, lazy, Suspense } from "react";
+import React, { useState, lazy, Suspense, FunctionComponent } from "react";
 import { render } from "react-dom";
 import { Router } from "@reach/router";
 
@@ -8,14 +8,14 @@ import NavBar from "./NavBar";
 
 const Details = lazy(() => import("./Details"));
 
-const App = () => {
+const App: FunctionComponent = () => {
   const themeHook = useState("blue");
 
   return (
     <React.StrictMode>
       <ThemeContext.Provider value={themeHook}>
         <div>
-          <NavBar></NavBar>
+          <NavBar />
           <Suspense fallback={<h1>Loading route...</h1>}>
             <Router>
               <SearchParams path="/" />
