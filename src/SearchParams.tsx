@@ -1,13 +1,19 @@
-import React, { useState, useEffect, useContext } from "react";
-import pet, { ANIMALS } from "@frontendmasters/pet";
+import React, {
+  useState,
+  useEffect,
+  useContext,
+  FunctionComponent
+} from "react";
+import pet, { ANIMALS, Animal } from "@frontendmasters/pet";
+import { RouteComponentProps } from "@reach/router";
 
 import useDropDown from "./useDropdown";
 import Results from "./Results";
 import ThemeContext from "./ThemeContext";
 
-const SearchParams = () => {
+const SearchParams: FunctionComponent<RouteComponentProps> = () => {
   const [location, setLocation] = useState("Seatle, WA");
-  const [pets, setPets] = useState([]);
+  const [pets, setPets] = useState([] as Animal[]);
   const [animal, AnimalDropDowns] = useDropDown("Animal", "cat", ANIMALS);
   const [breed, BreedDropDowns, setBreed, setBreeds] = useDropDown(
     "Breed",
@@ -17,7 +23,7 @@ const SearchParams = () => {
   const [theme, setTheme] = useContext(ThemeContext);
 
   useEffect(() => {
-    setBreed();
+    setBreed("");
     setBreeds([]);
 
     pet
@@ -33,7 +39,7 @@ const SearchParams = () => {
     setPets(animals || []);
   }
 
-  const onSubmit = e => {
+  const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setTheme(theme === "blue" ? "green" : "blue");
     requestPets();
@@ -49,7 +55,7 @@ const SearchParams = () => {
             value={location}
             placeholder={location}
             onChange={e => setLocation(e.target.value)}
-          ></input>
+          />
         </label>
 
         {AnimalDropDowns}
@@ -58,7 +64,7 @@ const SearchParams = () => {
         <button style={{ backgroundColor: theme }}>Submit</button>
       </form>
 
-      <Results pets={pets}></Results>
+      <Results pets={pets} />
     </div>
   );
 };
